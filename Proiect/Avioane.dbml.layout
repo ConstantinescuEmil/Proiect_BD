@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.625, 10.75" name="Avioane">
+  <DataContextMoniker Name="/AvioaneDataContext" />
+  <nestedChildShapes>
+    <classShape Id="98270dc8-56ee-4df9-9de9-50869062860e" absoluteBounds="4, 1.25, 2, 1.9631982421875">
+      <DataClassMoniker Name="/AvioaneDataContext/Avioane" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bcdc01e4-710f-4671-9266-9777f526d4cc" absoluteBounds="4.015, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="441e4615-88be-4d9b-9335-d21c6579b256" absoluteBounds="9.375, 4.5, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/AvioaneDataContext/Bilete" />
+      <nestedChildShapes>
+        <elementListCompartment Id="886f2d37-5558-45f4-8700-57ec0fc5e321" absoluteBounds="9.39, 4.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2cdf1e10-a21d-4ed7-ab01-a57a0eed2bf4" absoluteBounds="6.5, 8.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/AvioaneDataContext/Calatori" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cad28935-2c7a-4f64-a76d-c489a009d086" absoluteBounds="6.515, 8.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="67cd87d5-e46f-4f38-8d49-ad1eda617dbc" absoluteBounds="6.625, 0.875, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/AvioaneDataContext/Compozitie_Rute" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02bd8037-edd3-4d5a-9391-fb21de79b3b8" absoluteBounds="6.64, 1.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c8f7b00e-f728-4b6c-8839-7373626f166f" absoluteBounds="3.875, 6.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AvioaneDataContext/Destinatii" />
+      <nestedChildShapes>
+        <elementListCompartment Id="05cccac9-b57c-458e-b870-097af04f49c3" absoluteBounds="3.89, 6.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9e5bddcc-792e-45c6-96d0-e074c60c4ad6" absoluteBounds="3.875, 3.75, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/AvioaneDataContext/Rute" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dfac7b3e-0c7f-4532-8adb-6d3ac76b91c9" absoluteBounds="3.89, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.96875 : 3.2131982421875); (5.96875 : 5.75564697265625); (7.54166666666667 : 5.75564697265625 : JumpStart); (7.70833333333333 : 5.75564697265625 : JumpEnd); (9.375 : 5.75564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AvioaneDataContext/Avioane/Avioane_Bilete" />
+      <nodes>
+        <classShapeMoniker Id="98270dc8-56ee-4df9-9de9-50869062860e" />
+        <classShapeMoniker Id="441e4615-88be-4d9b-9335-d21c6579b256" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.0625 : 8.375); (7.0625 : 6.55372483072917); (7.54166666666667 : 6.55372483072917 : JumpStart); (7.70833333333333 : 6.55372483072917 : JumpEnd); (9.375 : 6.55372483072917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AvioaneDataContext/Calatori/Calatori_Bilete" />
+      <nodes>
+        <classShapeMoniker Id="2cdf1e10-a21d-4ed7-ab01-a57a0eed2bf4" />
+        <classShapeMoniker Id="441e4615-88be-4d9b-9335-d21c6579b256" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.875 : 7.28929768880208); (6.97916666666667 : 7.28929768880208 : JumpStart); (7.14583333333333 : 7.28929768880208 : JumpEnd); (7.625 : 7.28929768880208); (7.625 : 2.06899251302083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AvioaneDataContext/Destinatii/Destinatii_Compozitie_Rute" />
+      <nodes>
+        <classShapeMoniker Id="c8f7b00e-f728-4b6c-8839-7373626f166f" />
+        <classShapeMoniker Id="67cd87d5-e46f-4f38-8d49-ad1eda617dbc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.9375 : 3.75); (4.9375 : 3.2131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AvioaneDataContext/Rute/Rute_Avioane" />
+      <nodes>
+        <classShapeMoniker Id="9e5bddcc-792e-45c6-96d0-e074c60c4ad6" />
+        <classShapeMoniker Id="98270dc8-56ee-4df9-9de9-50869062860e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.90625 : 3.75); (3.90625 : 1.03125); (6.625 : 1.03125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AvioaneDataContext/Rute/Rute_Compozitie_Rute" />
+      <nodes>
+        <classShapeMoniker Id="9e5bddcc-792e-45c6-96d0-e074c60c4ad6" />
+        <classShapeMoniker Id="67cd87d5-e46f-4f38-8d49-ad1eda617dbc" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

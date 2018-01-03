@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Avioane" Class="AvioaneDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Avioane;Integrated Security=True" SettingsObjectName="Proiect.Properties.Settings" SettingsPropertyName="AvioaneConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Avioane" Member="Avioanes">
+    <Type Name="Avioane">
+      <Column Name="ID_Avion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nume" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Capacitate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ora_inceput" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Viteza_medie" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Ruta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Avioane_Bilete" Member="Biletes" ThisKey="ID_Avion" OtherKey="ID_Avion" Type="Bilete" />
+      <Association Name="Rute_Avioane" Member="Rute" ThisKey="ID_Ruta" OtherKey="ID_Ruta" Type="Rute" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bilete" Member="Biletes">
+    <Type Name="Bilete">
+      <Column Name="ID_Bilet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Avion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Cod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Destinatie_1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Destinatie_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Ora_Decolare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Ora_Aterizare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="ID_Calator" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Checkin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Optiuni" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Avioane_Bilete" Member="Avioane" ThisKey="ID_Avion" OtherKey="ID_Avion" Type="Avioane" IsForeignKey="true" />
+      <Association Name="Calatori_Bilete" Member="Calatori" ThisKey="ID_Calator" OtherKey="ID_Calator" Type="Calatori" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Calatori" Member="Calatoris">
+    <Type Name="Calatori">
+      <Column Name="ID_Calator" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Loc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Nume" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Prenume" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Adresa" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Telefon" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Detalii_Buletin" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Calatori_Bilete" Member="Biletes" ThisKey="ID_Calator" OtherKey="ID_Calator" Type="Bilete" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Compozitie_Rute" Member="Compozitie_Rutes">
+    <Type Name="Compozitie_Rute">
+      <Column Name="ID_Ruta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Destinatie" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Destinatii_Compozitie_Rute" Member="Destinatii" ThisKey="ID_Destinatie" OtherKey="ID_Destinatie" Type="Destinatii" IsForeignKey="true" />
+      <Association Name="Rute_Compozitie_Rute" Member="Rute" ThisKey="ID_Ruta" OtherKey="ID_Ruta" Type="Rute" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Destinatii" Member="Destinatiis">
+    <Type Name="Destinatii">
+      <Column Name="ID_Destinatie" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nume" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Pozitie_x" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pozitie_y" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Destinatii_Compozitie_Rute" Member="Compozitie_Rutes" ThisKey="ID_Destinatie" OtherKey="ID_Destinatie" Type="Compozitie_Rute" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rute" Member="Rutes">
+    <Type Name="Rute">
+      <Column Name="ID_Ruta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Inceput" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Final" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Rute_Avioane" Member="Avioanes" ThisKey="ID_Ruta" OtherKey="ID_Ruta" Type="Avioane" />
+      <Association Name="Rute_Compozitie_Rute" Member="Compozitie_Rutes" ThisKey="ID_Ruta" OtherKey="ID_Ruta" Type="Compozitie_Rute" />
+    </Type>
+  </Table>
+</Database>
