@@ -26,45 +26,13 @@ namespace Proiect
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<int> result = Utility.AvioaneCeTrecPrinStatie("Amsterdam");
-            string res="";
-            foreach (var i in result)
-            {
-                res = res + " " + i.ToString();
-            }
+            Graf graf = new Graf();
+            graf.Dijkstra_Modificat(1, 2, "2018-10-10");
+            TimeSpan h1 = Utility.OraAjungAvionStatie("Av1", "Lisbon");
             this.textBox1.Clear();
-            this.textBox1.Text = res;
+            this.textBox1.Text = h1.ToString();
+            
         }
     }
-    public static class Utility
-    {
-        public static int NumarLocuriLibereLaDestinatie(string NumeAvion, string Data, string Destinatie)
-        {
-            var context = new AvioaneDataContext();
-           
-        }
-        public static List<int> AvioaneCeTrecPrinStatie(string NumeStatie)
-        {
-            var context = new AvioaneDataContext();
-            List<int> result = new List<int>();
-
-            var RuteCuStX = from c in context.Rutes
-                            join o in context.Compozitie_Rutes
-                            on c.ID_Ruta equals o.ID_Ruta
-                            join w in context.Destinatiis on o.ID_Destinatie equals w.ID_Destinatie
-                            where w.Nume.Equals(NumeStatie)
-                            select c.ID_Ruta;
-            foreach (var i in RuteCuStX)
-            {
-                var AvioaneInX = from c in context.Avioanes
-                                 where c.ID_Ruta.Equals(i)
-                                 select c.ID_Avion;
-                foreach (var avi in AvioaneInX)
-                {
-                    if (!result.Contains(avi)) result.Add(avi);
-                }
-            }
-            return result;
-        }
-    }
+   
 }
