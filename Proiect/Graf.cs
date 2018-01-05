@@ -8,12 +8,12 @@ namespace Proiect
     public class Graf
     {
         private List<List<List<int>>> Compozitie;
-        public List<int> StatiiFinale;
-        public List<int> Optiuni;
+        public List<Tuple<int,int,int,TimeSpan>> StatiiFinale;
+        int ok;
         public Graf()
         {
-            StatiiFinale = new List<int>();
-            Optiuni = new List<int>();
+            StatiiFinale = new List<Tuple<int, int, int, TimeSpan>>();
+            ok = 0;
             var context = new AvioaneDataContext();
             var Destinatii = from c in context.Destinatiis
                              select c.ID_Destinatie;
@@ -55,10 +55,9 @@ namespace Proiect
         {
             //atentie la constructorul da copiere al lui tamespan
             int NrNoduriAdaugate = 0;
+            ok = 0;
             StatiiFinale.Clear();
-            Optiuni.Clear();
-
-            List<Tuple<int,int,int>> noduri = new List<Tuple<int,int,int>>();
+            List<Tuple<int,int,int,TimeSpan>> noduri = new List<Tuple<int,int,int,TimeSpan>>();
             List<int> Caretrec = Utility.AvioaneCeTrecPrinStatie(Utility.GetStatieName(Statie1));
             Tuple<TimeSpan, int> min=new Tuple<TimeSpan, int>(new TimeSpan(23,59,59),0);
             for(int i=0;i<Caretrec.ToList().Count;i++)
@@ -79,21 +78,47 @@ namespace Proiect
             if(min!=new Tuple<TimeSpan, int>(new TimeSpan(23, 59, 59), 0))
             {
                 NrNoduriAdaugate++;
-                Optiuni.Add(min.Item2);
-                StatiiFinale.Add(Statie1);
-                noduri.Add(new Tuple<int, int,int>(Statie1, 0,min.Item2));
+                noduri.Add(new Tuple<int, int,int,TimeSpan>(Statie1, -1,min.Item2,min.Item1));
             }
-            int u = AvionulCelMaiConvenabil(noduri.ElementAt(0), 2, Data);
+            List<Tuple<int, int, int, TimeSpan>> Potentiale_muchii = new List<Tuple<int, int, int, TimeSpan>>();
+            //cat timp mai pot adauga noduri in arborele de cost minim
             while(NrNoduriAdaugate!=0)
             {
+                //nu am inca variante potentiale
+                Potentiale_muchii.Clear();
                 NrNoduriAdaugate = 0;
-                for(int i=0;i<noduri.Count;i++)
+                //pentru fiecar nod deja in arbore
+                for (int i = 0; i < noduri.Count; i++)
                 {
-                   
+                    int nod_curent = noduri.ElementAt(i).Item1;
+                    int parinte = noduri.ElementAt(i).Item2;
+                    int avion = noduri.ElementAt(i).Item3;
+                    //pentru fiecare nod vecin al lui nod curent;
+                    for (int j = 1; j < Compozitie.ElementAt(nod_curent).Count; j++)
+                    {
+                        //daca vecinul nu exista in arbore
+                        //daca sunt rute posibile intre nodcurent si j
+                        if (Compozitie.ElementAt(nod_curent).ElementAt(j).Count != 0 && (!EsteInNOduri(j, noduri)))
+                        {
+                            //adaug o variante potentiala de muchie
+                            Potentiale_muchii.Add(AvionulCelMaiConvenabil(noduri.ElementAt(i), j, Data));
+                        }
+                    }
                 }
+                if(Potentiale_muchii.Count!=0)
+                {
+                    Tuple<int, int, int, TimeSpan> CelMaiOptim = MuchiaPentrArbore(Potentiale_muchii);
+                    if(CelMaiOptim.Item4!=new TimeSpan(23,59,59))
+                     {
+                      NrNoduriAdaugate++;
+                      noduri.Add(CelMaiOptim);
+                     }
+                }
+               
             }
+            Reconstituire_Cale(noduri, Statie2, Statie1);
         }
-          private bool EsteInNOduri(int nod, List<Tuple<int, int,int>> noduri)
+          private bool EsteInNOduri(int nod, List<Tuple<int, int,int,TimeSpan>> noduri)
         {
             int ok = 0;
             for(int i=0;i<noduri.Count;i++)
@@ -103,7 +128,7 @@ namespace Proiect
             if (ok == 1) return true;
             else return false;
         }
-        private int AvionulCelMaiConvenabil(Tuple<int, int, int> nod1,int nod2,string Data)
+        private Tuple<int,int,int,TimeSpan> AvionulCelMaiConvenabil(Tuple<int, int, int,TimeSpan> nod1,int nod2,string Data)
         {
             Tuple<TimeSpan, int> min = new Tuple<TimeSpan, int>(new TimeSpan(23, 59, 59), 0);
             for(int k=0;k<Compozitie.ElementAt(nod1.Item1).ElementAt(nod2).Count;k++)
@@ -113,7 +138,7 @@ namespace Proiect
                        Utility.GetNumeAvion( Compozitie.ElementAt(nod1.Item1).ElementAt(nod2).ElementAt(k)),
                        Data,
                        Utility.GetStatieName(nod2))
-                    !=0)
+                    >0)
                  {
                     TimeSpan orasec = Utility.OraAjungAvionStatie(
                         Utility.GetNumeAvion(Compozitie.ElementAt(nod1.Item1).ElementAt(nod2).ElementAt(k)),
@@ -127,15 +152,57 @@ namespace Proiect
                         if(orasec<min.Item1)
                         {
                             min = new Tuple<TimeSpan, int>(orasec, Compozitie.ElementAt(nod1.Item1).ElementAt(nod2).ElementAt(k));
+                          
                         }
                     }
                  }
             }
             if(min.Item1!=new TimeSpan(23,59,59))
             {
-                return min.Item2;
+                return new Tuple<int, int,int, TimeSpan>(nod2,nod1.Item1,min.Item2,min.Item1);
+            }
+            else
+            return new Tuple<int, int, int,TimeSpan>(-1, -1,-1, new TimeSpan(23,59,59));
+        }
+        private Tuple<int,int,int,TimeSpan> MuchiaPentrArbore(List<Tuple<int,int,int,TimeSpan>>Potentiali)
+        {
+            TimeSpan Tmin = Potentiali.ElementAt(0).Item4;
+            int index = 0;
+            for(int k=1;k<Potentiali.Count;k++)
+            {
+                if(Tmin>Potentiali.ElementAt(k).Item4)
+                {
+                    index = k;
+                    Tmin = Potentiali.ElementAt(k).Item4;
+                }
+            }
+            return Potentiali.ElementAt(index);
+        }
+        private void Reconstituire_Cale(List<Tuple<int,int,int,TimeSpan>>Arbore,int Destinatie,int Inceput)
+        {
+            int result = GetIndexOfNode(Destinatie,Arbore);
+            if(result!=-1)
+            {
+                StatiiFinale.Add(Arbore.ElementAt(result));
+                if (result == Inceput) ok = 1;
+                result = GetIndexOfNode(Arbore.ElementAt(result).Item2, Arbore);
+            }
+            
+            while(result!=-1)
+            {
+                if (result == Inceput) ok = 1;
+                StatiiFinale.Add(Arbore.ElementAt(result));
+                result = GetIndexOfNode(Arbore.ElementAt(result).Item2, Arbore);
+            }
+        }
+        private int GetIndexOfNode(int Node,List<Tuple<int,int,int, TimeSpan>>Noduri)
+        {
+            for(int k=0;k<Noduri.Count;k++)
+            {
+                if (Noduri.ElementAt(k).Item1 == Node) return k;
             }
             return -1;
         }
     }
+   
 }

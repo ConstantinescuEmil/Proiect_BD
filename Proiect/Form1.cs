@@ -27,7 +27,7 @@ namespace Proiect
         private void button1_Click(object sender, EventArgs e)
         {
             Graf graf = new Graf();
-            graf.Dijkstra_Modificat(1, 2, "2018-10-10");
+            graf.Dijkstra_Modificat(5, 12, "2018-10-10");
             TimeSpan h1 = Utility.OraAjungAvionStatie("Av1", "Lisbon");
             this.textBox1.Clear();
             this.textBox1.Text = h1.ToString();
