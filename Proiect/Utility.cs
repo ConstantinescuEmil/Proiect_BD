@@ -145,6 +145,31 @@ namespace Proiect
                      select c.Nume;
             return (string)id.ToList().ElementAt(0);
         }
+       /*
+        * pentur proceduri stocate:
+        * adaugare statie
+        * adaugare conexiune intre statii la un anumit avion (cu verificare de coliziuni pentru ca un avion sa
+        * ajunga doar intr-o singura statie)
+        * adaugare dea vion
+        * adaugarea de bilet simplu
+        * procedura pentru simularea trecerii unei zi
+        * jurnalizarea profiturilor pentru zile si avioane(extensie la baza de data)
+        * stargera unui avion din cauza uzurii (adica sa nu se mai poata sa se cumpere bilet dupa o anumita data pentru
+        *  un avion ca nu osa mai circule)
+        * stergerea o sa se faca cascadat cu o procedura stocata
+        * AGAUGAREA DE BILETE SE FACE PRIN INTERMEDIUL TRANZACTIEI
+        * implementare calculare pret
+        * generarea vodului aleator pentru fiecare bilet
+        * implementarea check-in (daca nu s-a facut si se simuleaza zborul se vor sterge biletele asociate )
+        * un client trebuie sa isi faca checkinul pentru fiecare blet in parte
+        * modalitate de stocare a datei curente pentru ca sa pot simula trecerea unei zile
+        * modalitate de simulare a trecerii unei ore 
+        *   daca a trecut o ora pentru fiecare avion daca a trecut printr-o statie sa se afiseze cine a intrat si cine a 
+        *   iesit
+        * implementarea pentru un client a sumei platite in cadrul biletului (extensie de camp la bilete)
+        * afisarea unei liste de opriuni pentru fiecare bilet care sa adauge la pret
+        * adaugarea de optiune e tot o tranzactie
+        */
 
     }
 }
