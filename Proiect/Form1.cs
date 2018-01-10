@@ -27,10 +27,12 @@ namespace Proiect
         private void button1_Click(object sender, EventArgs e)
         {
             Graf graf = new Graf();
-            graf.Dijkstra_Modificat(5, 12, "2018-10-10");
-            TimeSpan h1 = Utility.OraAjungAvionStatie("Av1", "Lisbon");
+            graf.Dijkstra_Modificat(1, 12, "2018-10-10");
+           // TimeSpan h1 = Utility.OraAjungAvionStatie("Av1", "Lisbon");
+            Utility.Adauga_Bilete(graf.StatiiFinale, "2018-10-10", "ana", "maria", "12345677");
             this.textBox1.Clear();
-            this.textBox1.Text = h1.ToString();
+            this.textBox1.Text = "dffijdfidjikdjfdsikf";
+            //this.textBox1.Text = h1.ToString();
             
         }
     }

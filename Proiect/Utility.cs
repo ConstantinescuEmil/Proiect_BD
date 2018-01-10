@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Proiect
 {
@@ -145,15 +146,149 @@ namespace Proiect
                      select c.Nume;
             return (string)id.ToList().ElementAt(0);
         }
+        public static int Verif_data_reciclare(string date,int avion)
+        {
+            var context = new AvioaneDataContext();
+            var data = from c in context.Avioanes
+                       where c.ID_Avion.Equals(avion)
+                       select c.Data_Reciclare;
+            DateTime DataBilet = new DateTime(Int32.Parse (date.Split(new char[] { '-'}).ElementAt(0)),
+               Int32.Parse( date.Split(new char[] { '-'}).ElementAt(1))
+               ,Int32.Parse(date.Split(new char[] { '-'}).ElementAt(2))
+                );
+            if (DataBilet >= data.ToList().ElementAt(0))
+            {
+                return 0;
+            }
+            else return 1;
+        }
+        public static int GetRandomNumber()
+        {
+            Random rnd = new Random();
+            return rnd.Next();
+        }
+        public static  void Adauga_Bilete(List<Tuple<int,int,int,TimeSpan>> statii,string data,string NumeClient,string Prenume,string CNPclient)
+        {
+            statii.Reverse();
+            var context = new AvioaneDataContext();
+            int i = 1;
+            int index = 0;
+            int OkBilet = 1;
+           
+                for (int j = 0; j < statii.Count; j++)
+                {
+                    if (Verif_data_reciclare(data, statii.ElementAt(j).Item3) == 0)
+                    {
+                        OkBilet = 0;
+                        break;
+                    }
+                }
+            
+                if (OkBilet == 1)
+                {
+                //fac un client nou cu numele si prenumele
+                //daca acesta nu si-a cumparad deja bilete pentru o a alta data
+                var Cnp_De_Cautat = from c in context.Calatoris
+                                    where c.CNP.Equals(CNPclient)
+                                    select c.CNP;
+                if (Cnp_De_Cautat.ToList().Count == 0)
+                {
+                    var client1 = new Calatori
+                    {
+                        Nume = NumeClient,
+                        Prenume = Prenume,
+                        CNP = CNPclient
+                    };
+                    context.Calatoris.InsertOnSubmit(client1);
+                    context.SubmitChanges();
+                }
+                    var IDulCalatorIntrodus = from c in context.Calatoris
+                                              where c.CNP.Equals(CNPclient)
+                                              select c.ID_Calator;
+                using (var scope = new TransactionScope())
+                {
+                    try
+                    {
+
+                        while (i < statii.Count)
+                        {
+                            if (statii.ElementAt(i).Item3 == statii.ElementAt(index).Item3)
+                            {
+
+                                if (i == statii.Count - 1)
+                                {
+                                    //fac bilet
+                                    var bilet1 = new Bilete
+                                    {
+                                        ID_Avion = statii.ElementAt(index).Item3,
+                                        Data = Convert.ToDateTime(data),
+                                        Cod = Utility.GetRandomNumber(),
+                                        Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index).Item1),
+                                        Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i).Item1),
+                                        Ora_Decolare = statii.ElementAt(index).Item4,
+                                        Ora_Aterizare = statii.ElementAt(i).Item4,
+                                        ID_Calator = IDulCalatorIntrodus.ToList().ElementAt(0)
+
+                                    };
+                                    context.Biletes.InsertOnSubmit(bilet1);
+                                   
+                                    index = i;
+                                }
+
+                            }
+                            else
+                            {//fac bilet
+                                var bilet1 = new Bilete
+                                {
+                                    ID_Avion = statii.ElementAt(index).Item3,
+                                    Data = Convert.ToDateTime(data),
+                                    Cod = Utility.GetRandomNumber(),
+                                    Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index).Item1),
+                                    Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i).Item1),
+                                    Ora_Decolare = statii.ElementAt(index).Item4,
+                                    Ora_Aterizare = statii.ElementAt(i).Item4,
+                                    ID_Calator = IDulCalatorIntrodus.ToList().ElementAt(0)
+
+                                };
+                                context.Biletes.InsertOnSubmit(bilet1);
+                                //context.SubmitChanges();
+
+                                index = i;
+                            }
+                            i++;
+                        }
+                        context.SubmitChanges();
+                        scope.Complete();
+                    }
+                    catch
+                    {
+                        scope.Dispose();
+                        var client = from c in context.Calatoris
+                                     where c.CNP.Equals(CNPclient)
+                                     select c;
+                        context.Calatoris.DeleteOnSubmit(client.First());
+                        context.SubmitChanges();
+                    }
+                }
+                
+            }
+
+            
+            //daca a m ok la bilete fac un client cu numele si prenumele
+            //asignez la bilete clientul acela
+            //dau submit
+            // altfel dau rollbak 
+            
+        }
        /*
         * pentur proceduri stocate:
         * adaugare statie
         * adaugare conexiune intre statii la un anumit avion (cu verificare de coliziuni pentru ca un avion sa
         * ajunga doar intr-o singura statie)
         * adaugare dea vion
-        * adaugarea de bilet simplu
+        *   AM AMANAT adaugarea de bilet simplu
         * procedura pentru simularea trecerii unei zi
-        * jurnalizarea profiturilor pentru zile si avioane(extensie la baza de data)
+        * procedure stergere bilete din acea zi
         * stargera unui avion din cauza uzurii (adica sa nu se mai poata sa se cumpere bilet dupa o anumita data pentru
         *  un avion ca nu osa mai circule)
         * stergerea o sa se faca cascadat cu o procedura stocata
@@ -169,6 +304,7 @@ namespace Proiect
         * implementarea pentru un client a sumei platite in cadrul biletului (extensie de camp la bilete)
         * afisarea unei liste de opriuni pentru fiecare bilet care sa adauge la pret
         * adaugarea de optiune e tot o tranzactie
+        * jurnalizarea profiturilor pentru zile si avioane(extensie la baza de data)
         */
 
     }

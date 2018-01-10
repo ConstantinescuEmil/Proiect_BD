@@ -30,15 +30,9 @@ namespace Proiect
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAvioane(Avioane instance);
-    partial void UpdateAvioane(Avioane instance);
-    partial void DeleteAvioane(Avioane instance);
     partial void InsertBilete(Bilete instance);
     partial void UpdateBilete(Bilete instance);
     partial void DeleteBilete(Bilete instance);
-    partial void InsertCalatori(Calatori instance);
-    partial void UpdateCalatori(Calatori instance);
-    partial void DeleteCalatori(Calatori instance);
     partial void InsertCompozitie_Rute(Compozitie_Rute instance);
     partial void UpdateCompozitie_Rute(Compozitie_Rute instance);
     partial void DeleteCompozitie_Rute(Compozitie_Rute instance);
@@ -48,6 +42,12 @@ namespace Proiect
     partial void InsertRute(Rute instance);
     partial void UpdateRute(Rute instance);
     partial void DeleteRute(Rute instance);
+    partial void InsertAvioane(Avioane instance);
+    partial void UpdateAvioane(Avioane instance);
+    partial void DeleteAvioane(Avioane instance);
+    partial void InsertCalatori(Calatori instance);
+    partial void UpdateCalatori(Calatori instance);
+    partial void DeleteCalatori(Calatori instance);
     #endregion
 		
 		public AvioaneDataContext() : 
@@ -80,27 +80,11 @@ namespace Proiect
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Avioane> Avioanes
-		{
-			get
-			{
-				return this.GetTable<Avioane>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Bilete> Biletes
 		{
 			get
 			{
 				return this.GetTable<Bilete>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Calatori> Calatoris
-		{
-			get
-			{
-				return this.GetTable<Calatori>();
 			}
 		}
 		
@@ -127,256 +111,29 @@ namespace Proiect
 				return this.GetTable<Rute>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Avioane")]
-	public partial class Avioane : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Avion;
-		
-		private string _Nume;
-		
-		private System.Nullable<int> _Capacitate;
-		
-		private System.Nullable<System.TimeSpan> _Ora_inceput;
-		
-		private System.Nullable<int> _Viteza_medie;
-		
-		private int _ID_Ruta;
-		
-		private EntitySet<Bilete> _Biletes;
-		
-		private EntityRef<Rute> _Rute;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_AvionChanging(int value);
-    partial void OnID_AvionChanged();
-    partial void OnNumeChanging(string value);
-    partial void OnNumeChanged();
-    partial void OnCapacitateChanging(System.Nullable<int> value);
-    partial void OnCapacitateChanged();
-    partial void OnOra_inceputChanging(System.Nullable<System.TimeSpan> value);
-    partial void OnOra_inceputChanged();
-    partial void OnViteza_medieChanging(System.Nullable<int> value);
-    partial void OnViteza_medieChanged();
-    partial void OnID_RutaChanging(int value);
-    partial void OnID_RutaChanged();
-    #endregion
-		
-		public Avioane()
-		{
-			this._Biletes = new EntitySet<Bilete>(new Action<Bilete>(this.attach_Biletes), new Action<Bilete>(this.detach_Biletes));
-			this._Rute = default(EntityRef<Rute>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Avion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Avion
+		public System.Data.Linq.Table<Avioane> Avioanes
 		{
 			get
 			{
-				return this._ID_Avion;
-			}
-			set
-			{
-				if ((this._ID_Avion != value))
-				{
-					this.OnID_AvionChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Avion = value;
-					this.SendPropertyChanged("ID_Avion");
-					this.OnID_AvionChanged();
-				}
+				return this.GetTable<Avioane>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nume", DbType="NVarChar(MAX)")]
-		public string Nume
+		public System.Data.Linq.Table<Calatori> Calatoris
 		{
 			get
 			{
-				return this._Nume;
-			}
-			set
-			{
-				if ((this._Nume != value))
-				{
-					this.OnNumeChanging(value);
-					this.SendPropertyChanging();
-					this._Nume = value;
-					this.SendPropertyChanged("Nume");
-					this.OnNumeChanged();
-				}
+				return this.GetTable<Calatori>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Capacitate", DbType="Int")]
-		public System.Nullable<int> Capacitate
+		public System.Data.Linq.Table<Data_Curenta> Data_Curentas
 		{
 			get
 			{
-				return this._Capacitate;
+				return this.GetTable<Data_Curenta>();
 			}
-			set
-			{
-				if ((this._Capacitate != value))
-				{
-					this.OnCapacitateChanging(value);
-					this.SendPropertyChanging();
-					this._Capacitate = value;
-					this.SendPropertyChanged("Capacitate");
-					this.OnCapacitateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_inceput", DbType="Time")]
-		public System.Nullable<System.TimeSpan> Ora_inceput
-		{
-			get
-			{
-				return this._Ora_inceput;
-			}
-			set
-			{
-				if ((this._Ora_inceput != value))
-				{
-					this.OnOra_inceputChanging(value);
-					this.SendPropertyChanging();
-					this._Ora_inceput = value;
-					this.SendPropertyChanged("Ora_inceput");
-					this.OnOra_inceputChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Viteza_medie", DbType="Int")]
-		public System.Nullable<int> Viteza_medie
-		{
-			get
-			{
-				return this._Viteza_medie;
-			}
-			set
-			{
-				if ((this._Viteza_medie != value))
-				{
-					this.OnViteza_medieChanging(value);
-					this.SendPropertyChanging();
-					this._Viteza_medie = value;
-					this.SendPropertyChanged("Viteza_medie");
-					this.OnViteza_medieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Ruta", DbType="Int NOT NULL")]
-		public int ID_Ruta
-		{
-			get
-			{
-				return this._ID_Ruta;
-			}
-			set
-			{
-				if ((this._ID_Ruta != value))
-				{
-					if (this._Rute.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_RutaChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Ruta = value;
-					this.SendPropertyChanged("ID_Ruta");
-					this.OnID_RutaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avioane_Bilete", Storage="_Biletes", ThisKey="ID_Avion", OtherKey="ID_Avion")]
-		public EntitySet<Bilete> Biletes
-		{
-			get
-			{
-				return this._Biletes;
-			}
-			set
-			{
-				this._Biletes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rute_Avioane", Storage="_Rute", ThisKey="ID_Ruta", OtherKey="ID_Ruta", IsForeignKey=true)]
-		public Rute Rute
-		{
-			get
-			{
-				return this._Rute.Entity;
-			}
-			set
-			{
-				Rute previousValue = this._Rute.Entity;
-				if (((previousValue != value) 
-							|| (this._Rute.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Rute.Entity = null;
-						previousValue.Avioanes.Remove(this);
-					}
-					this._Rute.Entity = value;
-					if ((value != null))
-					{
-						value.Avioanes.Add(this);
-						this._ID_Ruta = value.ID_Ruta;
-					}
-					else
-					{
-						this._ID_Ruta = default(int);
-					}
-					this.SendPropertyChanged("Rute");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Biletes(Bilete entity)
-		{
-			this.SendPropertyChanging();
-			entity.Avioane = this;
-		}
-		
-		private void detach_Biletes(Bilete entity)
-		{
-			this.SendPropertyChanging();
-			entity.Avioane = null;
 		}
 	}
 	
@@ -764,240 +521,6 @@ namespace Proiect
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Calatori")]
-	public partial class Calatori : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Calator;
-		
-		private string _Loc;
-		
-		private string _Nume;
-		
-		private string _Prenume;
-		
-		private string _Adresa;
-		
-		private string _Telefon;
-		
-		private string _Detalii_Buletin;
-		
-		private EntitySet<Bilete> _Biletes;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_CalatorChanging(int value);
-    partial void OnID_CalatorChanged();
-    partial void OnLocChanging(string value);
-    partial void OnLocChanged();
-    partial void OnNumeChanging(string value);
-    partial void OnNumeChanged();
-    partial void OnPrenumeChanging(string value);
-    partial void OnPrenumeChanged();
-    partial void OnAdresaChanging(string value);
-    partial void OnAdresaChanged();
-    partial void OnTelefonChanging(string value);
-    partial void OnTelefonChanged();
-    partial void OnDetalii_BuletinChanging(string value);
-    partial void OnDetalii_BuletinChanged();
-    #endregion
-		
-		public Calatori()
-		{
-			this._Biletes = new EntitySet<Bilete>(new Action<Bilete>(this.attach_Biletes), new Action<Bilete>(this.detach_Biletes));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Calator", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Calator
-		{
-			get
-			{
-				return this._ID_Calator;
-			}
-			set
-			{
-				if ((this._ID_Calator != value))
-				{
-					this.OnID_CalatorChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Calator = value;
-					this.SendPropertyChanged("ID_Calator");
-					this.OnID_CalatorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc", DbType="VarChar(MAX)")]
-		public string Loc
-		{
-			get
-			{
-				return this._Loc;
-			}
-			set
-			{
-				if ((this._Loc != value))
-				{
-					this.OnLocChanging(value);
-					this.SendPropertyChanging();
-					this._Loc = value;
-					this.SendPropertyChanged("Loc");
-					this.OnLocChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nume", DbType="VarChar(MAX)")]
-		public string Nume
-		{
-			get
-			{
-				return this._Nume;
-			}
-			set
-			{
-				if ((this._Nume != value))
-				{
-					this.OnNumeChanging(value);
-					this.SendPropertyChanging();
-					this._Nume = value;
-					this.SendPropertyChanged("Nume");
-					this.OnNumeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prenume", DbType="VarChar(MAX)")]
-		public string Prenume
-		{
-			get
-			{
-				return this._Prenume;
-			}
-			set
-			{
-				if ((this._Prenume != value))
-				{
-					this.OnPrenumeChanging(value);
-					this.SendPropertyChanging();
-					this._Prenume = value;
-					this.SendPropertyChanged("Prenume");
-					this.OnPrenumeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adresa", DbType="VarChar(MAX)")]
-		public string Adresa
-		{
-			get
-			{
-				return this._Adresa;
-			}
-			set
-			{
-				if ((this._Adresa != value))
-				{
-					this.OnAdresaChanging(value);
-					this.SendPropertyChanging();
-					this._Adresa = value;
-					this.SendPropertyChanged("Adresa");
-					this.OnAdresaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefon", DbType="VarChar(MAX)")]
-		public string Telefon
-		{
-			get
-			{
-				return this._Telefon;
-			}
-			set
-			{
-				if ((this._Telefon != value))
-				{
-					this.OnTelefonChanging(value);
-					this.SendPropertyChanging();
-					this._Telefon = value;
-					this.SendPropertyChanged("Telefon");
-					this.OnTelefonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Detalii_Buletin", DbType="VarChar(MAX)")]
-		public string Detalii_Buletin
-		{
-			get
-			{
-				return this._Detalii_Buletin;
-			}
-			set
-			{
-				if ((this._Detalii_Buletin != value))
-				{
-					this.OnDetalii_BuletinChanging(value);
-					this.SendPropertyChanging();
-					this._Detalii_Buletin = value;
-					this.SendPropertyChanged("Detalii_Buletin");
-					this.OnDetalii_BuletinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Calatori_Bilete", Storage="_Biletes", ThisKey="ID_Calator", OtherKey="ID_Calator")]
-		public EntitySet<Bilete> Biletes
-		{
-			get
-			{
-				return this._Biletes;
-			}
-			set
-			{
-				this._Biletes.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Biletes(Bilete entity)
-		{
-			this.SendPropertyChanging();
-			entity.Calatori = this;
-		}
-		
-		private void detach_Biletes(Bilete entity)
-		{
-			this.SendPropertyChanging();
-			entity.Calatori = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Compozitie_Rute")]
 	public partial class Compozitie_Rute : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1340,9 +863,9 @@ namespace Proiect
 		
 		private string _Final;
 		
-		private EntitySet<Avioane> _Avioanes;
-		
 		private EntitySet<Compozitie_Rute> _Compozitie_Rutes;
+		
+		private EntitySet<Avioane> _Avioanes;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1358,8 +881,8 @@ namespace Proiect
 		
 		public Rute()
 		{
-			this._Avioanes = new EntitySet<Avioane>(new Action<Avioane>(this.attach_Avioanes), new Action<Avioane>(this.detach_Avioanes));
 			this._Compozitie_Rutes = new EntitySet<Compozitie_Rute>(new Action<Compozitie_Rute>(this.attach_Compozitie_Rutes), new Action<Compozitie_Rute>(this.detach_Compozitie_Rutes));
+			this._Avioanes = new EntitySet<Avioane>(new Action<Avioane>(this.attach_Avioanes), new Action<Avioane>(this.detach_Avioanes));
 			OnCreated();
 		}
 		
@@ -1423,19 +946,6 @@ namespace Proiect
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rute_Avioane", Storage="_Avioanes", ThisKey="ID_Ruta", OtherKey="ID_Ruta")]
-		public EntitySet<Avioane> Avioanes
-		{
-			get
-			{
-				return this._Avioanes;
-			}
-			set
-			{
-				this._Avioanes.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rute_Compozitie_Rute", Storage="_Compozitie_Rutes", ThisKey="ID_Ruta", OtherKey="ID_Ruta")]
 		public EntitySet<Compozitie_Rute> Compozitie_Rutes
 		{
@@ -1446,6 +956,19 @@ namespace Proiect
 			set
 			{
 				this._Compozitie_Rutes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rute_Avioane", Storage="_Avioanes", ThisKey="ID_Ruta", OtherKey="ID_Ruta")]
+		public EntitySet<Avioane> Avioanes
+		{
+			get
+			{
+				return this._Avioanes;
+			}
+			set
+			{
+				this._Avioanes.Assign(value);
 			}
 		}
 		
@@ -1469,6 +992,18 @@ namespace Proiect
 			}
 		}
 		
+		private void attach_Compozitie_Rutes(Compozitie_Rute entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rute = this;
+		}
+		
+		private void detach_Compozitie_Rutes(Compozitie_Rute entity)
+		{
+			this.SendPropertyChanging();
+			entity.Rute = null;
+		}
+		
 		private void attach_Avioanes(Avioane entity)
 		{
 			this.SendPropertyChanging();
@@ -1480,17 +1015,583 @@ namespace Proiect
 			this.SendPropertyChanging();
 			entity.Rute = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Avioane")]
+	public partial class Avioane : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Compozitie_Rutes(Compozitie_Rute entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Avion;
+		
+		private string _Nume;
+		
+		private System.Nullable<int> _Capacitate;
+		
+		private System.Nullable<System.TimeSpan> _Ora_inceput;
+		
+		private System.Nullable<int> _Viteza_medie;
+		
+		private int _ID_Ruta;
+		
+		private System.Nullable<System.DateTime> _Data_Reciclare;
+		
+		private EntitySet<Bilete> _Biletes;
+		
+		private EntityRef<Rute> _Rute;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_AvionChanging(int value);
+    partial void OnID_AvionChanged();
+    partial void OnNumeChanging(string value);
+    partial void OnNumeChanged();
+    partial void OnCapacitateChanging(System.Nullable<int> value);
+    partial void OnCapacitateChanged();
+    partial void OnOra_inceputChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnOra_inceputChanged();
+    partial void OnViteza_medieChanging(System.Nullable<int> value);
+    partial void OnViteza_medieChanged();
+    partial void OnID_RutaChanging(int value);
+    partial void OnID_RutaChanged();
+    partial void OnData_ReciclareChanging(System.Nullable<System.DateTime> value);
+    partial void OnData_ReciclareChanged();
+    #endregion
+		
+		public Avioane()
 		{
-			this.SendPropertyChanging();
-			entity.Rute = this;
+			this._Biletes = new EntitySet<Bilete>(new Action<Bilete>(this.attach_Biletes), new Action<Bilete>(this.detach_Biletes));
+			this._Rute = default(EntityRef<Rute>);
+			OnCreated();
 		}
 		
-		private void detach_Compozitie_Rutes(Compozitie_Rute entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Avion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Avion
+		{
+			get
+			{
+				return this._ID_Avion;
+			}
+			set
+			{
+				if ((this._ID_Avion != value))
+				{
+					this.OnID_AvionChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Avion = value;
+					this.SendPropertyChanged("ID_Avion");
+					this.OnID_AvionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nume", DbType="NVarChar(MAX)")]
+		public string Nume
+		{
+			get
+			{
+				return this._Nume;
+			}
+			set
+			{
+				if ((this._Nume != value))
+				{
+					this.OnNumeChanging(value);
+					this.SendPropertyChanging();
+					this._Nume = value;
+					this.SendPropertyChanged("Nume");
+					this.OnNumeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Capacitate", DbType="Int")]
+		public System.Nullable<int> Capacitate
+		{
+			get
+			{
+				return this._Capacitate;
+			}
+			set
+			{
+				if ((this._Capacitate != value))
+				{
+					this.OnCapacitateChanging(value);
+					this.SendPropertyChanging();
+					this._Capacitate = value;
+					this.SendPropertyChanged("Capacitate");
+					this.OnCapacitateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_inceput", DbType="Time")]
+		public System.Nullable<System.TimeSpan> Ora_inceput
+		{
+			get
+			{
+				return this._Ora_inceput;
+			}
+			set
+			{
+				if ((this._Ora_inceput != value))
+				{
+					this.OnOra_inceputChanging(value);
+					this.SendPropertyChanging();
+					this._Ora_inceput = value;
+					this.SendPropertyChanged("Ora_inceput");
+					this.OnOra_inceputChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Viteza_medie", DbType="Int")]
+		public System.Nullable<int> Viteza_medie
+		{
+			get
+			{
+				return this._Viteza_medie;
+			}
+			set
+			{
+				if ((this._Viteza_medie != value))
+				{
+					this.OnViteza_medieChanging(value);
+					this.SendPropertyChanging();
+					this._Viteza_medie = value;
+					this.SendPropertyChanged("Viteza_medie");
+					this.OnViteza_medieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Ruta", DbType="Int NOT NULL")]
+		public int ID_Ruta
+		{
+			get
+			{
+				return this._ID_Ruta;
+			}
+			set
+			{
+				if ((this._ID_Ruta != value))
+				{
+					if (this._Rute.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_RutaChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Ruta = value;
+					this.SendPropertyChanged("ID_Ruta");
+					this.OnID_RutaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data_Reciclare", DbType="Date")]
+		public System.Nullable<System.DateTime> Data_Reciclare
+		{
+			get
+			{
+				return this._Data_Reciclare;
+			}
+			set
+			{
+				if ((this._Data_Reciclare != value))
+				{
+					this.OnData_ReciclareChanging(value);
+					this.SendPropertyChanging();
+					this._Data_Reciclare = value;
+					this.SendPropertyChanged("Data_Reciclare");
+					this.OnData_ReciclareChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avioane_Bilete", Storage="_Biletes", ThisKey="ID_Avion", OtherKey="ID_Avion")]
+		public EntitySet<Bilete> Biletes
+		{
+			get
+			{
+				return this._Biletes;
+			}
+			set
+			{
+				this._Biletes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rute_Avioane", Storage="_Rute", ThisKey="ID_Ruta", OtherKey="ID_Ruta", IsForeignKey=true)]
+		public Rute Rute
+		{
+			get
+			{
+				return this._Rute.Entity;
+			}
+			set
+			{
+				Rute previousValue = this._Rute.Entity;
+				if (((previousValue != value) 
+							|| (this._Rute.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Rute.Entity = null;
+						previousValue.Avioanes.Remove(this);
+					}
+					this._Rute.Entity = value;
+					if ((value != null))
+					{
+						value.Avioanes.Add(this);
+						this._ID_Ruta = value.ID_Ruta;
+					}
+					else
+					{
+						this._ID_Ruta = default(int);
+					}
+					this.SendPropertyChanged("Rute");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Biletes(Bilete entity)
 		{
 			this.SendPropertyChanging();
-			entity.Rute = null;
+			entity.Avioane = this;
+		}
+		
+		private void detach_Biletes(Bilete entity)
+		{
+			this.SendPropertyChanging();
+			entity.Avioane = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Calatori")]
+	public partial class Calatori : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Calator;
+		
+		private string _Loc;
+		
+		private string _Nume;
+		
+		private string _Prenume;
+		
+		private string _Adresa;
+		
+		private string _Telefon;
+		
+		private string _Detalii_Buletin;
+		
+		private string _CNP;
+		
+		private EntitySet<Bilete> _Biletes;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_CalatorChanging(int value);
+    partial void OnID_CalatorChanged();
+    partial void OnLocChanging(string value);
+    partial void OnLocChanged();
+    partial void OnNumeChanging(string value);
+    partial void OnNumeChanged();
+    partial void OnPrenumeChanging(string value);
+    partial void OnPrenumeChanged();
+    partial void OnAdresaChanging(string value);
+    partial void OnAdresaChanged();
+    partial void OnTelefonChanging(string value);
+    partial void OnTelefonChanged();
+    partial void OnDetalii_BuletinChanging(string value);
+    partial void OnDetalii_BuletinChanged();
+    partial void OnCNPChanging(string value);
+    partial void OnCNPChanged();
+    #endregion
+		
+		public Calatori()
+		{
+			this._Biletes = new EntitySet<Bilete>(new Action<Bilete>(this.attach_Biletes), new Action<Bilete>(this.detach_Biletes));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Calator", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Calator
+		{
+			get
+			{
+				return this._ID_Calator;
+			}
+			set
+			{
+				if ((this._ID_Calator != value))
+				{
+					this.OnID_CalatorChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Calator = value;
+					this.SendPropertyChanged("ID_Calator");
+					this.OnID_CalatorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc", DbType="VarChar(MAX)")]
+		public string Loc
+		{
+			get
+			{
+				return this._Loc;
+			}
+			set
+			{
+				if ((this._Loc != value))
+				{
+					this.OnLocChanging(value);
+					this.SendPropertyChanging();
+					this._Loc = value;
+					this.SendPropertyChanged("Loc");
+					this.OnLocChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nume", DbType="VarChar(MAX)")]
+		public string Nume
+		{
+			get
+			{
+				return this._Nume;
+			}
+			set
+			{
+				if ((this._Nume != value))
+				{
+					this.OnNumeChanging(value);
+					this.SendPropertyChanging();
+					this._Nume = value;
+					this.SendPropertyChanged("Nume");
+					this.OnNumeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prenume", DbType="VarChar(MAX)")]
+		public string Prenume
+		{
+			get
+			{
+				return this._Prenume;
+			}
+			set
+			{
+				if ((this._Prenume != value))
+				{
+					this.OnPrenumeChanging(value);
+					this.SendPropertyChanging();
+					this._Prenume = value;
+					this.SendPropertyChanged("Prenume");
+					this.OnPrenumeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adresa", DbType="VarChar(MAX)")]
+		public string Adresa
+		{
+			get
+			{
+				return this._Adresa;
+			}
+			set
+			{
+				if ((this._Adresa != value))
+				{
+					this.OnAdresaChanging(value);
+					this.SendPropertyChanging();
+					this._Adresa = value;
+					this.SendPropertyChanged("Adresa");
+					this.OnAdresaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefon", DbType="VarChar(MAX)")]
+		public string Telefon
+		{
+			get
+			{
+				return this._Telefon;
+			}
+			set
+			{
+				if ((this._Telefon != value))
+				{
+					this.OnTelefonChanging(value);
+					this.SendPropertyChanging();
+					this._Telefon = value;
+					this.SendPropertyChanged("Telefon");
+					this.OnTelefonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Detalii_Buletin", DbType="VarChar(MAX)")]
+		public string Detalii_Buletin
+		{
+			get
+			{
+				return this._Detalii_Buletin;
+			}
+			set
+			{
+				if ((this._Detalii_Buletin != value))
+				{
+					this.OnDetalii_BuletinChanging(value);
+					this.SendPropertyChanging();
+					this._Detalii_Buletin = value;
+					this.SendPropertyChanged("Detalii_Buletin");
+					this.OnDetalii_BuletinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CNP", DbType="VarChar(MAX)")]
+		public string CNP
+		{
+			get
+			{
+				return this._CNP;
+			}
+			set
+			{
+				if ((this._CNP != value))
+				{
+					this.OnCNPChanging(value);
+					this.SendPropertyChanging();
+					this._CNP = value;
+					this.SendPropertyChanged("CNP");
+					this.OnCNPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Calatori_Bilete", Storage="_Biletes", ThisKey="ID_Calator", OtherKey="ID_Calator")]
+		public EntitySet<Bilete> Biletes
+		{
+			get
+			{
+				return this._Biletes;
+			}
+			set
+			{
+				this._Biletes.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Biletes(Bilete entity)
+		{
+			this.SendPropertyChanging();
+			entity.Calatori = this;
+		}
+		
+		private void detach_Biletes(Bilete entity)
+		{
+			this.SendPropertyChanging();
+			entity.Calatori = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Data_Curenta")]
+	public partial class Data_Curenta
+	{
+		
+		private System.Nullable<System.DateTime> _Data_Curenta1;
+		
+		private System.Nullable<int> _Data_singulara;
+		
+		public Data_Curenta()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Data_Curenta", Storage="_Data_Curenta1", DbType="Date")]
+		public System.Nullable<System.DateTime> Data_Curenta1
+		{
+			get
+			{
+				return this._Data_Curenta1;
+			}
+			set
+			{
+				if ((this._Data_Curenta1 != value))
+				{
+					this._Data_Curenta1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data_singulara", DbType="Int")]
+		public System.Nullable<int> Data_singulara
+		{
+			get
+			{
+				return this._Data_singulara;
+			}
+			set
+			{
+				if ((this._Data_singulara != value))
+				{
+					this._Data_singulara = value;
+				}
+			}
 		}
 	}
 }
