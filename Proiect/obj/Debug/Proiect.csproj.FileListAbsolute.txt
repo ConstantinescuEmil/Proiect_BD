@@ -1,10 +1,13 @@
 E:\An III\BazeDate\PROIECT\Proiect\bin\Debug\Proiect.exe.config
 E:\An III\BazeDate\PROIECT\Proiect\bin\Debug\Proiect.exe
 E:\An III\BazeDate\PROIECT\Proiect\bin\Debug\Proiect.pdb
-E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.csprojResolveAssemblyReference.cache
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.Form1.resources
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.Properties.Resources.resources
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.csproj.GenerateResource.Cache
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.csproj.CoreCompileInputs.cache
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.exe
 E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.pdb
+E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.Form2.resources
+E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.Form3.resources
+E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.Form4.resources
+E:\An III\BazeDate\PROIECT\Proiect\obj\Debug\Proiect.csprojResolveAssemblyReference.cache

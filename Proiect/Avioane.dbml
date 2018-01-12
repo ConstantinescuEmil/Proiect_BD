@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Avioane" Class="AvioaneDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Avioane;Integrated Security=True" SettingsObjectName="Proiect.Properties.Settings" SettingsPropertyName="AvioaneConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Bilete" Member="Biletes">
-    <Type Name="Bilete">
-      <Column Name="ID_Bilet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Avion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Data" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Cod" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Destinatie_1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Destinatie_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Ora_Decolare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="Ora_Aterizare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="ID_Calator" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Checkin" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Optiuni" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Avioane_Bilete" Member="Avioane" ThisKey="ID_Avion" OtherKey="ID_Avion" Type="Avioane" IsForeignKey="true" />
-      <Association Name="Calatori_Bilete" Member="Calatori" ThisKey="ID_Calator" OtherKey="ID_Calator" Type="Calatori" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Compozitie_Rute" Member="Compozitie_Rutes">
     <Type Name="Compozitie_Rute">
       <Column Name="ID_Ruta" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -73,6 +56,25 @@
     <Type Name="Data_Curenta">
       <Column Name="Data_Curenta" Member="Data_Curenta1" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Data_singulara" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bilete" Member="Biletes">
+    <Type Name="Bilete">
+      <Column Name="ID_Bilet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Avion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Cod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Destinatie_1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Destinatie_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Ora_Decolare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Ora_Aterizare" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="ID_Calator" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Checkin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Optiuni" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Loc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pret" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Avioane_Bilete" Member="Avioane" ThisKey="ID_Avion" OtherKey="ID_Avion" Type="Avioane" IsForeignKey="true" />
+      <Association Name="Calatori_Bilete" Member="Calatori" ThisKey="ID_Calator" OtherKey="ID_Calator" Type="Calatori" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

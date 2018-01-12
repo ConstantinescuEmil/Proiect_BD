@@ -163,6 +163,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(540, 150);
             this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // CheckinB
             // 
@@ -172,6 +173,7 @@
             this.CheckinB.TabIndex = 11;
             this.CheckinB.Text = "CHECK-IN";
             this.CheckinB.UseVisualStyleBackColor = true;
+            this.CheckinB.Click += new System.EventHandler(this.CheckinB_Click);
             // 
             // CumparaB
             // 
@@ -179,8 +181,9 @@
             this.CumparaB.Name = "CumparaB";
             this.CumparaB.Size = new System.Drawing.Size(120, 23);
             this.CumparaB.TabIndex = 12;
-            this.CumparaB.Text = "Cumpara Biletele";
+            this.CumparaB.Text = "Detalii";
             this.CumparaB.UseVisualStyleBackColor = true;
+            this.CumparaB.Click += new System.EventHandler(this.CumparaB_Click);
             // 
             // Form1
             // 

@@ -30,9 +30,6 @@ namespace Proiect
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBilete(Bilete instance);
-    partial void UpdateBilete(Bilete instance);
-    partial void DeleteBilete(Bilete instance);
     partial void InsertCompozitie_Rute(Compozitie_Rute instance);
     partial void UpdateCompozitie_Rute(Compozitie_Rute instance);
     partial void DeleteCompozitie_Rute(Compozitie_Rute instance);
@@ -48,6 +45,9 @@ namespace Proiect
     partial void InsertCalatori(Calatori instance);
     partial void UpdateCalatori(Calatori instance);
     partial void DeleteCalatori(Calatori instance);
+    partial void InsertBilete(Bilete instance);
+    partial void UpdateBilete(Bilete instance);
+    partial void DeleteBilete(Bilete instance);
     #endregion
 		
 		public AvioaneDataContext() : 
@@ -78,14 +78,6 @@ namespace Proiect
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Bilete> Biletes
-		{
-			get
-			{
-				return this.GetTable<Bilete>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Compozitie_Rute> Compozitie_Rutes
@@ -135,388 +127,12 @@ namespace Proiect
 				return this.GetTable<Data_Curenta>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bilete")]
-	public partial class Bilete : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Bilet;
-		
-		private int _ID_Avion;
-		
-		private System.Nullable<System.DateTime> _Data;
-		
-		private System.Nullable<int> _Cod;
-		
-		private string _Destinatie_1;
-		
-		private string _Destinatie_2;
-		
-		private System.Nullable<System.TimeSpan> _Ora_Decolare;
-		
-		private System.Nullable<System.TimeSpan> _Ora_Aterizare;
-		
-		private System.Nullable<int> _ID_Calator;
-		
-		private System.Nullable<int> _Checkin;
-		
-		private string _Optiuni;
-		
-		private EntityRef<Avioane> _Avioane;
-		
-		private EntityRef<Calatori> _Calatori;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_BiletChanging(int value);
-    partial void OnID_BiletChanged();
-    partial void OnID_AvionChanging(int value);
-    partial void OnID_AvionChanged();
-    partial void OnDataChanging(System.Nullable<System.DateTime> value);
-    partial void OnDataChanged();
-    partial void OnCodChanging(System.Nullable<int> value);
-    partial void OnCodChanged();
-    partial void OnDestinatie_1Changing(string value);
-    partial void OnDestinatie_1Changed();
-    partial void OnDestinatie_2Changing(string value);
-    partial void OnDestinatie_2Changed();
-    partial void OnOra_DecolareChanging(System.Nullable<System.TimeSpan> value);
-    partial void OnOra_DecolareChanged();
-    partial void OnOra_AterizareChanging(System.Nullable<System.TimeSpan> value);
-    partial void OnOra_AterizareChanged();
-    partial void OnID_CalatorChanging(System.Nullable<int> value);
-    partial void OnID_CalatorChanged();
-    partial void OnCheckinChanging(System.Nullable<int> value);
-    partial void OnCheckinChanged();
-    partial void OnOptiuniChanging(string value);
-    partial void OnOptiuniChanged();
-    #endregion
-		
-		public Bilete()
-		{
-			this._Avioane = default(EntityRef<Avioane>);
-			this._Calatori = default(EntityRef<Calatori>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Bilet", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_Bilet
+		public System.Data.Linq.Table<Bilete> Biletes
 		{
 			get
 			{
-				return this._ID_Bilet;
-			}
-			set
-			{
-				if ((this._ID_Bilet != value))
-				{
-					this.OnID_BiletChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Bilet = value;
-					this.SendPropertyChanged("ID_Bilet");
-					this.OnID_BiletChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Avion", DbType="Int NOT NULL")]
-		public int ID_Avion
-		{
-			get
-			{
-				return this._ID_Avion;
-			}
-			set
-			{
-				if ((this._ID_Avion != value))
-				{
-					if (this._Avioane.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_AvionChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Avion = value;
-					this.SendPropertyChanged("ID_Avion");
-					this.OnID_AvionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="Date")]
-		public System.Nullable<System.DateTime> Data
-		{
-			get
-			{
-				return this._Data;
-			}
-			set
-			{
-				if ((this._Data != value))
-				{
-					this.OnDataChanging(value);
-					this.SendPropertyChanging();
-					this._Data = value;
-					this.SendPropertyChanged("Data");
-					this.OnDataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cod", DbType="Int")]
-		public System.Nullable<int> Cod
-		{
-			get
-			{
-				return this._Cod;
-			}
-			set
-			{
-				if ((this._Cod != value))
-				{
-					this.OnCodChanging(value);
-					this.SendPropertyChanging();
-					this._Cod = value;
-					this.SendPropertyChanged("Cod");
-					this.OnCodChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destinatie_1", DbType="VarChar(MAX)")]
-		public string Destinatie_1
-		{
-			get
-			{
-				return this._Destinatie_1;
-			}
-			set
-			{
-				if ((this._Destinatie_1 != value))
-				{
-					this.OnDestinatie_1Changing(value);
-					this.SendPropertyChanging();
-					this._Destinatie_1 = value;
-					this.SendPropertyChanged("Destinatie_1");
-					this.OnDestinatie_1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destinatie_2", DbType="VarChar(MAX)")]
-		public string Destinatie_2
-		{
-			get
-			{
-				return this._Destinatie_2;
-			}
-			set
-			{
-				if ((this._Destinatie_2 != value))
-				{
-					this.OnDestinatie_2Changing(value);
-					this.SendPropertyChanging();
-					this._Destinatie_2 = value;
-					this.SendPropertyChanged("Destinatie_2");
-					this.OnDestinatie_2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_Decolare", DbType="Time")]
-		public System.Nullable<System.TimeSpan> Ora_Decolare
-		{
-			get
-			{
-				return this._Ora_Decolare;
-			}
-			set
-			{
-				if ((this._Ora_Decolare != value))
-				{
-					this.OnOra_DecolareChanging(value);
-					this.SendPropertyChanging();
-					this._Ora_Decolare = value;
-					this.SendPropertyChanged("Ora_Decolare");
-					this.OnOra_DecolareChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_Aterizare", DbType="Time")]
-		public System.Nullable<System.TimeSpan> Ora_Aterizare
-		{
-			get
-			{
-				return this._Ora_Aterizare;
-			}
-			set
-			{
-				if ((this._Ora_Aterizare != value))
-				{
-					this.OnOra_AterizareChanging(value);
-					this.SendPropertyChanging();
-					this._Ora_Aterizare = value;
-					this.SendPropertyChanged("Ora_Aterizare");
-					this.OnOra_AterizareChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Calator", DbType="Int")]
-		public System.Nullable<int> ID_Calator
-		{
-			get
-			{
-				return this._ID_Calator;
-			}
-			set
-			{
-				if ((this._ID_Calator != value))
-				{
-					if (this._Calatori.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_CalatorChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Calator = value;
-					this.SendPropertyChanged("ID_Calator");
-					this.OnID_CalatorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Checkin", DbType="Int")]
-		public System.Nullable<int> Checkin
-		{
-			get
-			{
-				return this._Checkin;
-			}
-			set
-			{
-				if ((this._Checkin != value))
-				{
-					this.OnCheckinChanging(value);
-					this.SendPropertyChanging();
-					this._Checkin = value;
-					this.SendPropertyChanged("Checkin");
-					this.OnCheckinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Optiuni", DbType="VarChar(MAX)")]
-		public string Optiuni
-		{
-			get
-			{
-				return this._Optiuni;
-			}
-			set
-			{
-				if ((this._Optiuni != value))
-				{
-					this.OnOptiuniChanging(value);
-					this.SendPropertyChanging();
-					this._Optiuni = value;
-					this.SendPropertyChanged("Optiuni");
-					this.OnOptiuniChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avioane_Bilete", Storage="_Avioane", ThisKey="ID_Avion", OtherKey="ID_Avion", IsForeignKey=true)]
-		public Avioane Avioane
-		{
-			get
-			{
-				return this._Avioane.Entity;
-			}
-			set
-			{
-				Avioane previousValue = this._Avioane.Entity;
-				if (((previousValue != value) 
-							|| (this._Avioane.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Avioane.Entity = null;
-						previousValue.Biletes.Remove(this);
-					}
-					this._Avioane.Entity = value;
-					if ((value != null))
-					{
-						value.Biletes.Add(this);
-						this._ID_Avion = value.ID_Avion;
-					}
-					else
-					{
-						this._ID_Avion = default(int);
-					}
-					this.SendPropertyChanged("Avioane");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Calatori_Bilete", Storage="_Calatori", ThisKey="ID_Calator", OtherKey="ID_Calator", IsForeignKey=true)]
-		public Calatori Calatori
-		{
-			get
-			{
-				return this._Calatori.Entity;
-			}
-			set
-			{
-				Calatori previousValue = this._Calatori.Entity;
-				if (((previousValue != value) 
-							|| (this._Calatori.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Calatori.Entity = null;
-						previousValue.Biletes.Remove(this);
-					}
-					this._Calatori.Entity = value;
-					if ((value != null))
-					{
-						value.Biletes.Add(this);
-						this._ID_Calator = value.ID_Calator;
-					}
-					else
-					{
-						this._ID_Calator = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Calatori");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Bilete>();
 			}
 		}
 	}
@@ -1591,6 +1207,438 @@ namespace Proiect
 				{
 					this._Data_singulara = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bilete")]
+	public partial class Bilete : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Bilet;
+		
+		private int _ID_Avion;
+		
+		private System.Nullable<System.DateTime> _Data;
+		
+		private System.Nullable<int> _Cod;
+		
+		private string _Destinatie_1;
+		
+		private string _Destinatie_2;
+		
+		private System.Nullable<System.TimeSpan> _Ora_Decolare;
+		
+		private System.Nullable<System.TimeSpan> _Ora_Aterizare;
+		
+		private System.Nullable<int> _ID_Calator;
+		
+		private System.Nullable<int> _Checkin;
+		
+		private string _Optiuni;
+		
+		private System.Nullable<int> _Loc;
+		
+		private System.Nullable<int> _Pret;
+		
+		private EntityRef<Avioane> _Avioane;
+		
+		private EntityRef<Calatori> _Calatori;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_BiletChanging(int value);
+    partial void OnID_BiletChanged();
+    partial void OnID_AvionChanging(int value);
+    partial void OnID_AvionChanged();
+    partial void OnDataChanging(System.Nullable<System.DateTime> value);
+    partial void OnDataChanged();
+    partial void OnCodChanging(System.Nullable<int> value);
+    partial void OnCodChanged();
+    partial void OnDestinatie_1Changing(string value);
+    partial void OnDestinatie_1Changed();
+    partial void OnDestinatie_2Changing(string value);
+    partial void OnDestinatie_2Changed();
+    partial void OnOra_DecolareChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnOra_DecolareChanged();
+    partial void OnOra_AterizareChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnOra_AterizareChanged();
+    partial void OnID_CalatorChanging(System.Nullable<int> value);
+    partial void OnID_CalatorChanged();
+    partial void OnCheckinChanging(System.Nullable<int> value);
+    partial void OnCheckinChanged();
+    partial void OnOptiuniChanging(string value);
+    partial void OnOptiuniChanged();
+    partial void OnLocChanging(System.Nullable<int> value);
+    partial void OnLocChanged();
+    partial void OnPretChanging(System.Nullable<int> value);
+    partial void OnPretChanged();
+    #endregion
+		
+		public Bilete()
+		{
+			this._Avioane = default(EntityRef<Avioane>);
+			this._Calatori = default(EntityRef<Calatori>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Bilet", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_Bilet
+		{
+			get
+			{
+				return this._ID_Bilet;
+			}
+			set
+			{
+				if ((this._ID_Bilet != value))
+				{
+					this.OnID_BiletChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Bilet = value;
+					this.SendPropertyChanged("ID_Bilet");
+					this.OnID_BiletChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Avion", DbType="Int NOT NULL")]
+		public int ID_Avion
+		{
+			get
+			{
+				return this._ID_Avion;
+			}
+			set
+			{
+				if ((this._ID_Avion != value))
+				{
+					if (this._Avioane.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_AvionChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Avion = value;
+					this.SendPropertyChanged("ID_Avion");
+					this.OnID_AvionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="Date")]
+		public System.Nullable<System.DateTime> Data
+		{
+			get
+			{
+				return this._Data;
+			}
+			set
+			{
+				if ((this._Data != value))
+				{
+					this.OnDataChanging(value);
+					this.SendPropertyChanging();
+					this._Data = value;
+					this.SendPropertyChanged("Data");
+					this.OnDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cod", DbType="Int")]
+		public System.Nullable<int> Cod
+		{
+			get
+			{
+				return this._Cod;
+			}
+			set
+			{
+				if ((this._Cod != value))
+				{
+					this.OnCodChanging(value);
+					this.SendPropertyChanging();
+					this._Cod = value;
+					this.SendPropertyChanged("Cod");
+					this.OnCodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destinatie_1", DbType="VarChar(MAX)")]
+		public string Destinatie_1
+		{
+			get
+			{
+				return this._Destinatie_1;
+			}
+			set
+			{
+				if ((this._Destinatie_1 != value))
+				{
+					this.OnDestinatie_1Changing(value);
+					this.SendPropertyChanging();
+					this._Destinatie_1 = value;
+					this.SendPropertyChanged("Destinatie_1");
+					this.OnDestinatie_1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Destinatie_2", DbType="VarChar(MAX)")]
+		public string Destinatie_2
+		{
+			get
+			{
+				return this._Destinatie_2;
+			}
+			set
+			{
+				if ((this._Destinatie_2 != value))
+				{
+					this.OnDestinatie_2Changing(value);
+					this.SendPropertyChanging();
+					this._Destinatie_2 = value;
+					this.SendPropertyChanged("Destinatie_2");
+					this.OnDestinatie_2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_Decolare", DbType="Time")]
+		public System.Nullable<System.TimeSpan> Ora_Decolare
+		{
+			get
+			{
+				return this._Ora_Decolare;
+			}
+			set
+			{
+				if ((this._Ora_Decolare != value))
+				{
+					this.OnOra_DecolareChanging(value);
+					this.SendPropertyChanging();
+					this._Ora_Decolare = value;
+					this.SendPropertyChanged("Ora_Decolare");
+					this.OnOra_DecolareChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ora_Aterizare", DbType="Time")]
+		public System.Nullable<System.TimeSpan> Ora_Aterizare
+		{
+			get
+			{
+				return this._Ora_Aterizare;
+			}
+			set
+			{
+				if ((this._Ora_Aterizare != value))
+				{
+					this.OnOra_AterizareChanging(value);
+					this.SendPropertyChanging();
+					this._Ora_Aterizare = value;
+					this.SendPropertyChanged("Ora_Aterizare");
+					this.OnOra_AterizareChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Calator", DbType="Int")]
+		public System.Nullable<int> ID_Calator
+		{
+			get
+			{
+				return this._ID_Calator;
+			}
+			set
+			{
+				if ((this._ID_Calator != value))
+				{
+					if (this._Calatori.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CalatorChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Calator = value;
+					this.SendPropertyChanged("ID_Calator");
+					this.OnID_CalatorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Checkin", DbType="Int")]
+		public System.Nullable<int> Checkin
+		{
+			get
+			{
+				return this._Checkin;
+			}
+			set
+			{
+				if ((this._Checkin != value))
+				{
+					this.OnCheckinChanging(value);
+					this.SendPropertyChanging();
+					this._Checkin = value;
+					this.SendPropertyChanged("Checkin");
+					this.OnCheckinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Optiuni", DbType="VarChar(MAX)")]
+		public string Optiuni
+		{
+			get
+			{
+				return this._Optiuni;
+			}
+			set
+			{
+				if ((this._Optiuni != value))
+				{
+					this.OnOptiuniChanging(value);
+					this.SendPropertyChanging();
+					this._Optiuni = value;
+					this.SendPropertyChanged("Optiuni");
+					this.OnOptiuniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc", DbType="Int")]
+		public System.Nullable<int> Loc
+		{
+			get
+			{
+				return this._Loc;
+			}
+			set
+			{
+				if ((this._Loc != value))
+				{
+					this.OnLocChanging(value);
+					this.SendPropertyChanging();
+					this._Loc = value;
+					this.SendPropertyChanged("Loc");
+					this.OnLocChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pret", DbType="Int")]
+		public System.Nullable<int> Pret
+		{
+			get
+			{
+				return this._Pret;
+			}
+			set
+			{
+				if ((this._Pret != value))
+				{
+					this.OnPretChanging(value);
+					this.SendPropertyChanging();
+					this._Pret = value;
+					this.SendPropertyChanged("Pret");
+					this.OnPretChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avioane_Bilete", Storage="_Avioane", ThisKey="ID_Avion", OtherKey="ID_Avion", IsForeignKey=true)]
+		public Avioane Avioane
+		{
+			get
+			{
+				return this._Avioane.Entity;
+			}
+			set
+			{
+				Avioane previousValue = this._Avioane.Entity;
+				if (((previousValue != value) 
+							|| (this._Avioane.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Avioane.Entity = null;
+						previousValue.Biletes.Remove(this);
+					}
+					this._Avioane.Entity = value;
+					if ((value != null))
+					{
+						value.Biletes.Add(this);
+						this._ID_Avion = value.ID_Avion;
+					}
+					else
+					{
+						this._ID_Avion = default(int);
+					}
+					this.SendPropertyChanged("Avioane");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Calatori_Bilete", Storage="_Calatori", ThisKey="ID_Calator", OtherKey="ID_Calator", IsForeignKey=true)]
+		public Calatori Calatori
+		{
+			get
+			{
+				return this._Calatori.Entity;
+			}
+			set
+			{
+				Calatori previousValue = this._Calatori.Entity;
+				if (((previousValue != value) 
+							|| (this._Calatori.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Calatori.Entity = null;
+						previousValue.Biletes.Remove(this);
+					}
+					this._Calatori.Entity = value;
+					if ((value != null))
+					{
+						value.Biletes.Add(this);
+						this._ID_Calator = value.ID_Calator;
+					}
+					else
+					{
+						this._ID_Calator = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Calatori");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

@@ -8,7 +8,7 @@ namespace Proiect
     public class Graf
     {
         private List<List<List<int>>> Compozitie;
-        public List<Tuple<int,int,int,TimeSpan>> StatiiFinale;
+         public  List<Tuple<int,int,int,TimeSpan>> StatiiFinale;
         int ok;
         public Graf()
         {
