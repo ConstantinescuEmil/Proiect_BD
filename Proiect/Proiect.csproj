@@ -52,6 +52,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Avioane.dbml</DependentUpon>
     </Compile>
+    <Compile Include="AvioaneDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvioaneDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +86,17 @@
     </None>
     <None Include="Avioane.dbml.layout">
       <DependentUpon>Avioane.dbml</DependentUpon>
+    </None>
+    <None Include="AvioaneDataSet.xsc">
+      <DependentUpon>AvioaneDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AvioaneDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AvioaneDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AvioaneDataSet.xss">
+      <DependentUpon>AvioaneDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -167,6 +167,66 @@ namespace Proiect
             Random rnd = new Random();
             return rnd.Next();
         }
+        public static int GetIdStatie(string statiei)
+        {
+            var context = new AvioaneDataContext();
+            var statie = (from c in context.Destinatiis
+                          where c.Nume.Equals(statiei)
+                          select c).First();
+            return statie.ID_Destinatie;
+        }
+        public static List<Bilete> Afiseaza_posibile_bilete(List<Tuple<int, int, int, TimeSpan>> statii,string data)
+        {
+            statii.Reverse();
+            List<Bilete> results = new List<Bilete>();
+            int i = 1;
+            int index = 0;
+            while(i<statii.Count)
+            {
+                if (statii.ElementAt(i).Item3 == statii.ElementAt(index).Item3)
+                {
+                    if (i == statii.Count - 1)
+                    {
+                        //fac un posibil bilet
+                        var bilet1 = new Bilete
+                        {
+                            ID_Avion = statii.ElementAt(index).Item3,
+                            Data = Convert.ToDateTime(data),
+                            Cod = Utility.GetRandomNumber(),
+                            Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index-1).Item1),
+                            Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i).Item1),
+                            Ora_Decolare = statii.ElementAt(index-1).Item4,
+                            Ora_Aterizare = statii.ElementAt(i).Item4,
+                            ID_Calator =0
+
+                        };
+                        results.Add(bilet1);
+                        index = i;
+                    }
+                }
+                else
+                {
+                    //fac bilet
+                    var bilet1 = new Bilete
+                    {
+                        ID_Avion = statii.ElementAt(index).Item3,
+                        Data = Convert.ToDateTime(data),
+                        Cod = Utility.GetRandomNumber(),
+                        Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index).Item1),
+                        Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i-1).Item1),
+                        Ora_Decolare = statii.ElementAt(index).Item4,
+                        Ora_Aterizare = statii.ElementAt(i-1).Item4,
+                        ID_Calator =0
+                    };
+                    results.Add(bilet1);
+                    index = i;
+                }
+                i++;
+                
+            }
+            return results;
+
+        }
         public static  void Adauga_Bilete(List<Tuple<int,int,int,TimeSpan>> statii,string data,string NumeClient,string Prenume,string CNPclient)
         {
             statii.Reverse();
@@ -223,9 +283,9 @@ namespace Proiect
                                         ID_Avion = statii.ElementAt(index).Item3,
                                         Data = Convert.ToDateTime(data),
                                         Cod = Utility.GetRandomNumber(),
-                                        Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index).Item1),
+                                        Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index-1).Item1),
                                         Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i).Item1),
-                                        Ora_Decolare = statii.ElementAt(index).Item4,
+                                        Ora_Decolare = statii.ElementAt(index-1).Item4,
                                         Ora_Aterizare = statii.ElementAt(i).Item4,
                                         ID_Calator = IDulCalatorIntrodus.ToList().ElementAt(0)
 
@@ -244,9 +304,9 @@ namespace Proiect
                                     Data = Convert.ToDateTime(data),
                                     Cod = Utility.GetRandomNumber(),
                                     Destinatie_1 = Utility.GetStatieName(statii.ElementAt(index).Item1),
-                                    Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i).Item1),
+                                    Destinatie_2 = Utility.GetStatieName(statii.ElementAt(i-1).Item1),
                                     Ora_Decolare = statii.ElementAt(index).Item4,
-                                    Ora_Aterizare = statii.ElementAt(i).Item4,
+                                    Ora_Aterizare = statii.ElementAt(i-1).Item4,
                                     ID_Calator = IDulCalatorIntrodus.ToList().ElementAt(0)
 
                                 };
@@ -262,12 +322,12 @@ namespace Proiect
                     }
                     catch
                     {
-                        scope.Dispose();
+                       scope.Dispose();
                         var client = from c in context.Calatoris
                                      where c.CNP.Equals(CNPclient)
                                      select c;
                         context.Calatoris.DeleteOnSubmit(client.First());
-                        context.SubmitChanges();
+                        context.SubmitChanges(); 
                     }
                 }
                 
